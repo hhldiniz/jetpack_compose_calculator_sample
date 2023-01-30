@@ -11,8 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.hugo.compose_calculator_sample.components.CalculatorNumberButton
-import com.hugo.compose_calculator_sample.components.CalculatorOperationButton
+import com.hugo.compose_calculator_sample.components.CalculatorButton
 import com.hugo.compose_calculator_sample.ui.theme.Compose_calculator_sampleTheme
 
 class MainActivity : ComponentActivity() {
@@ -37,7 +36,9 @@ fun CalculatorContent() {
     Scaffold {
         var expression by remember { mutableStateOf("") }
         Column(
-            modifier = Modifier.fillMaxSize(),
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(it),
             verticalArrangement = Arrangement.SpaceBetween,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
@@ -45,42 +46,62 @@ fun CalculatorContent() {
             Row(modifier = Modifier.padding(16.dp)) {
                 Column {
                     Row {
-                        CalculatorNumberButton("9") {
+                        CalculatorButton("9") {
                             expression += 9
                         }
-                        CalculatorNumberButton("8") {}
-                        CalculatorNumberButton("7") {}
-                    }
-                    Row {
-                        CalculatorNumberButton("6") {}
-                        CalculatorNumberButton("5") {}
-                        CalculatorNumberButton("4") {}
-                    }
-                    Row {
-                        CalculatorNumberButton("3") {}
-                        CalculatorNumberButton("2") {}
-                        CalculatorNumberButton("1") {}
-                    }
-                }
-                Column {
-                    Row {
-                        CalculatorOperationButton("+") {}
-                        CalculatorOperationButton("-") {}
-                    }
-                    Row {
-                        CalculatorOperationButton("*") {}
-                        CalculatorOperationButton("/") {}
-                    }
-                    Row {
-                        Button(
-                            onClick = { /*TODO*/ },
-                            colors = ButtonDefaults.buttonColors(backgroundColor = Color.Red)
-                        ) {
-                            Text(text = "CE", color = Color.White)
+                        CalculatorButton("8") {
+                            expression += 8
                         }
-                        Button(onClick = { /*TODO*/ }) {
-                            Text(text = "=")
+                        CalculatorButton("7") {
+                            expression += 7
                         }
+                    }
+                    Row {
+                        CalculatorButton("6") {
+                            expression += 6
+                        }
+                        CalculatorButton("5") {
+                            expression += 5
+                        }
+                        CalculatorButton("4") {
+                            expression += 4
+                        }
+                    }
+                    Row {
+                        CalculatorButton("3") {
+                            expression += 3
+                        }
+                        CalculatorButton("2") {
+                            expression += 2
+                        }
+                        CalculatorButton("1") {
+                            expression += 1
+                        }
+                    }
+                    Row(modifier = Modifier.align(Alignment.End)) {
+                        CalculatorButton("0") {
+                            expression += 0
+                        }
+                    }
+                    Row(modifier = Modifier.align(Alignment.End)) {
+                        CalculatorButton("+", color = Color.Gray) {
+                            expression += "+"
+                        }
+                        CalculatorButton("-", color = Color.Gray) {
+                            expression += "-"
+                        }
+                        CalculatorButton("CE", color = Color.Red) {
+                            expression = ""
+                        }
+                    }
+                    Row(modifier = Modifier.align(Alignment.End)) {
+                        CalculatorButton("*", color = Color.Gray) {
+                            expression += "*"
+                        }
+                        CalculatorButton("/", color = Color.Gray) {
+                            expression += "/"
+                        }
+                        CalculatorButton("=", color = Color.Magenta) {}
                     }
                 }
             }
